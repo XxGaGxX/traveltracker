@@ -12,6 +12,7 @@ export default {
       passwordRetype: '',
       date: '',
       formValidated: false,
+      showAlert: false
     };
   },
   methods: {
@@ -67,8 +68,16 @@ export default {
         body: JSON.stringify(userData)
       });
 
-      const result = await response.json();
-      console.log(result);
+      if(response.ok){
+        const result = await response.json();
+        console.log(result);
+      }
+      else{
+        this.showAlert = true
+        this.name = this.username = this.lastName = this.password = this.passwordRetype = this.email = this.date = ''
+      }
+      
+      
     }
   }
 };
@@ -135,6 +144,10 @@ export default {
 
                 <div class="d-grid mb-3 col-12">
                   <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+                <div class="alert alert-danger" role="alert" v-if="showAlert">
+                  Errore nell'inserimento dell'utente
                 </div>
               </div>
             </form>

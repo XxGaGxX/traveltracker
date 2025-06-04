@@ -42,7 +42,8 @@ router.route("/getStazione/:nStazione").get((req, res) => {
 
 //endpoint of getTicket given some starting parameters
 router.route("/getTicket").post((req, res) => {
-  const searchParams = {
+  try {
+    const searchParams = {
       departureLocationId: req.body.departureStation,
       arrivalLocationId: req.body.arrivalStation,
       departureTime: req.body.departureDate,
@@ -71,6 +72,9 @@ router.route("/getTicket").post((req, res) => {
     res.status(201).json(data);
     
   });
+  } catch (error) {
+    res.status(404).send('Nessun ticket trovato')
+  }
 
 });
 
@@ -205,7 +209,7 @@ router.get("/getAeroporto/:nome", async (req, res) => {
 router.route("/addUser").post((req, res) => {
   dbInteractions.AddUser(req.body).then((data) => {
     try {
-      res.status(201).json(/* data["OkPacket"] */{Result: "Ok"});
+      res.status(201).json(data[0]);
     } catch (ex) {
       res.status(500).send(`Errore nell'inserimento nel DB.`)
     }

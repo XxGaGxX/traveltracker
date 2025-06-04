@@ -24,7 +24,7 @@ async function AddUser(data) {
     } catch (error) {
         // Log dell'errore
         console.error('Errore nell\'inserimento del cliente:', error);
-        throw error; // Rilancia l'errore
+        return undefined; // Rilancia l'errore
     }
 }
 
@@ -35,7 +35,8 @@ async function TryToLog(data) {
         return DoQuery([data.Username, data.Password], `SELECT Username, Mail, Nome, Cognome, DataDiNascita FROM Cliente WHERE Username=? AND Password=?`)
     }
     catch (error) {
-        throw new Error(error)
+        t//hrow new Error(error)
+        return undefined
     }
 }
 
@@ -57,7 +58,8 @@ async function AddViaggio(data) {
 
         return true;
     } catch (error) {
-        throw new Error(error.message || error);
+        //throw new Error(error.message || error);
+        return undefined
     }
 }
 
@@ -94,7 +96,8 @@ async function AddTratta(viaggioId, tratte) {
 
         return true;
     } catch (error) {
-        throw new Error(error.message || error);
+        //throw new Error(error.message || error);
+        return undefined
     }
 }
 
@@ -143,7 +146,8 @@ async function FetchViaggioGivenPartenzaArrivoUtente(data) {
             `
         )
     } catch (error) {
-        throw new Error(error.message || error);
+        //throw new Error(error.message || error);
+        return undefined
     }
 }
 

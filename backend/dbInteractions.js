@@ -35,7 +35,7 @@ async function TryToLog(data) {
         return DoQuery([data.Username, data.Password], `SELECT Username, Mail, Nome, Cognome, DataDiNascita FROM Cliente WHERE Username=? AND Password=?`)
     }
     catch (error) {
-        t//hrow new Error(error)
+        //throw new Error(error)
         return undefined
     }
 }
